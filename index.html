@@ -1,0 +1,61 @@
+<html>
+
+<head>
+    <title>Weather App</title>
+</head>
+
+<body>
+
+    <h1>Weather App</h1>
+
+    <div class="container" id="weather">
+
+        <div class="column">
+            <p>Enter a city to get the current weather:</p>
+        </div>
+
+        <div class="column">
+            <input type="text" id="city" placeholder="City Name">
+        </div>
+
+    </div>
+
+    <button onclick="getweather()">Get Weather</button>
+
+    <script>
+
+        const apiKey = "014ab034fcc74ce395c103650261405";
+
+        function getweather() {
+
+            const city = document.getElementById("city").value;
+
+            fetch("https://api.weatherapi.com/v1/current.json?key=" + apiKey + "&q=" + city)
+
+                .then(response => response.json())
+
+                .then(data => {
+
+                    document.getElementById("weather").innerHTML =
+                    
+                    `Your weather in ${data.location.name} is 
+                    
+                    ${data.current.temp_c}°C and the condition is 
+                    
+                    ${data.current.condition.text}`;
+
+                })
+
+                .catch(error => {
+
+                    console.log(error);
+
+                });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
